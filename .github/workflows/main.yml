@@ -41,7 +41,7 @@ jobs:
         exit 1
         fi
         git clone --depth=1 https://github.com/byl070/padavan-build.git /opt/build
-        cp -f /opt/build/truck/. /opt/rt-n56u/truck/
+        cp -f /opt/build/trunk/. /opt/rt-n56u/trunk/
         rm -f /opt/build
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
