@@ -42,7 +42,7 @@ jobs:
         else
         exit 1
         fi
-        git clone --depth=1 https://github.com/byl070/padavan-build.git /opt/rt-n56u
+        git clone https://github.com/byl070/padavan-build.git /opt/rt-n56u
         cd /opt/rt-n56u/trunk/configs/templates
         ls
         cd /opt/rt-n56u/toolchain-mipsel
