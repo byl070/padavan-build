@@ -57,9 +57,6 @@ jobs:
         cd ./templates
         pwd
         ls
-        cd ./padavan-build/trunk/configs/templates
-        pwd
-        ls
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
