@@ -1,4 +1,6 @@
 #software-properties-common-----python-docutils
+#        cp -rf ./padavan-build/trunk /opt/rt-n56u
+ #       rm -rf ./padavan-build
 name: Build Padavan
 
 on: 
@@ -41,8 +43,9 @@ jobs:
         exit 1
         fi
         git clone https://github.com/byl070/padavan-build.git
-        cp -rf ./padavan-build/trunk /opt/rt-n56u
-        rm -rf ./padavan-build
+        cd /padavan-build/trunk/configs/templates
+        pwd
+        ls
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
