@@ -7,10 +7,6 @@ on:
   push:
     tags:
     - 'v*'
-  #  branches: 
-  #    - master
-#  schedule:
-#    - cron: 0 8 * * 5
   watch:
     types: [started]
 
@@ -48,7 +44,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: HC5962
+        TNAME: RM2100
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
