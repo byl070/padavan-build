@@ -39,19 +39,19 @@ jobs:
       run: |
         if [ $KERNEL = "4.4" ] ; then
         git clone --depth=1 https://github.com/MeIsReallyBa/padavan-4.4.git /opt/rt-n56u
+        echo "rt-n56u"
+        pwd
         else
         exit 1
         fi
         git clone https://github.com/byl070/padavan-build.git
+        echo "build"
         pwd
         ls
         cd ./padavan-build
         pwd
         ls
         cd ./trunk
-        pwd
-        ls
-        cd /opt/rt-n56u/configs/templates
         pwd
         ls
         cd /opt/rt-n56u/toolchain-mipsel
