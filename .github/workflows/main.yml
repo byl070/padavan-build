@@ -36,13 +36,13 @@ jobs:
         KERNEL: 4.4
       run: |
         if [ $KERNEL = "4.4" ] ; then
-        git clone --depth=1 https://github.com/MeIsReallyBa/padavan-4.4.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/MeIsReallyBa/padavan-4.4.git /opt/rrt-n56u
         else
         exit 1
         fi
-        git clone --depth=1 https://github.com/byl070/padavan-build.git /opt/build
-        cp -rf /opt/build/trunk /opt/rt-n56u
-        rm -rf /opt/build
+        git clone --depth=1 https://github.com/byl070/padavan-build.git /opt/rt-n56u
+        # cp -rf /opt/build/trunk /opt/rt-n56u
+        # rm -rf /opt/build
         cd /opt/rt-n56u/trunk/configs/templates
         ls
         cd /opt/rt-n56u/toolchain-mipsel
