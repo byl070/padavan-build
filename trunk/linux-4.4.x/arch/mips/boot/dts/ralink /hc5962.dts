@@ -7,7 +7,7 @@
 
 / {
 	compatible = "mediatek,mt7621-soc";
-	model = "B70";
+	model = "HC5962";
 
 	chosen {
 		bootargs = "console=ttyS0,115200";
