@@ -40,12 +40,9 @@ jobs:
         else
         exit 1
         fi
-        git clone https://github.com/byl070/padavan-build.git
-        cp -rf ./padavan-build/trunk /opt/rt-n56u
-        rm -rf ./padavan-build
-        cd /opt/rt-n56u/trunk/configs/templates
-        pwd
-        ls
+        git clone https://github.com/byl070/padavan-build.git /opt/new
+        cp -rf /opt/new/trunk /opt/rt-n56u
+        rm -rf /opt/new
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
