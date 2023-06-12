@@ -43,6 +43,20 @@ jobs:
         exit 1
         fi
         git clone https://github.com/byl070/padavan-build.git
+        pwd
+        ls
+        cd ./padavan-build
+        pwd
+        ls
+        cd ./trunk
+        pwd
+        ls
+        cd ./configs
+        pwd
+        ls
+        cd ./templates
+        pwd
+        ls
         cd ./padavan-build/trunk/configs/templates
         pwd
         ls
