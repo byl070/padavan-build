@@ -43,6 +43,7 @@ jobs:
         exit 1
         fi
         git clone https://github.com/byl070/padavan-build.git
+        pwd
         ls
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
