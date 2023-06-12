@@ -43,7 +43,7 @@ jobs:
         exit 1
         fi
         git clone https://github.com/byl070/padavan-build.git
-        cd /padavan-build/trunk/configs/templates
+        cd ./padavan-build/trunk/configs/templates
         pwd
         ls
         cd /opt/rt-n56u/toolchain-mipsel
