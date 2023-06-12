@@ -1,6 +1,4 @@
 #software-properties-common-----python-docutils
-        # cp -rf /opt/build/trunk /opt/rt-n56u
-        # rm -rf /opt/build
 name: Build Padavan
 
 on: 
@@ -39,21 +37,12 @@ jobs:
       run: |
         if [ $KERNEL = "4.4" ] ; then
         git clone --depth=1 https://github.com/MeIsReallyBa/padavan-4.4.git /opt/rt-n56u
-        echo "rt-n56u"
-        pwd
         else
         exit 1
         fi
         git clone https://github.com/byl070/padavan-build.git
-        echo "build"
-        pwd
-        ls
-        cd ./padavan-build
-        pwd
-        ls
-        cd ./trunk
-        pwd
-        ls
+        cp -rf ./padavan-build/trunk /opt/rt-n56u
+        rm -rf ./padavan-build
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
