@@ -1,4 +1,4 @@
-/* HC5962 */
+/* B70 */
 
 #define BOARD_PID		"HC5962"
 #define BOARD_NAME		"HC5962"
