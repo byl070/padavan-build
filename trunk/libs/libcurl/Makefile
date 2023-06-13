@@ -1,18 +1,19 @@
-SRC_NAME = socat-1.7.4.4
-SRC_URL = http://www.dest-unreach.org/socat/download/$(SRC_NAME).tar.bz2
-THISDIR = $(shell pwd)
+SRC_NAME=curl-8.1.2
+SRC_URL=https://curl.se/download/$(SRC_NAME).tar.xz
+
+LDFLAGS += -Wl,-rpath-link=$(STAGEDIR)/lib
 
 all: download_test extract_test config_test
 	$(MAKE) -j$(HOST_NCPU) -C $(SRC_NAME)
 
 download_test:
-	( if [ ! -f $(SRC_NAME).tar.bz2 ]; then \
-		wget -t5 --timeout=20 --no-check-certificate -O $(SRC_NAME).tar.gz $(SRC_URL); \
+	( if [ ! -f $(SRC_NAME).tar.xz ]; then \
+		wget -t5 --timeout=20 --no-check-certificate -O $(SRC_NAME).tar.xz $(SRC_URL); \
 	fi )
 
 extract_test:
 	( if [ ! -d $(SRC_NAME) ]; then \
-		tar xf $(SRC_NAME).tar.bz2; \
+		tar xf $(SRC_NAME).tar.xz; \
 	fi )
 
 config_test:
@@ -25,18 +26,53 @@ config_test:
 configure:
 	( cd $(SRC_NAME) ; \
 	./configure \
-		--prefix=/usr \
-		--disable-openssl \
-		--disable-readline \
+		--prefix=$(STAGEDIR) \
+		--enable-static \
+		--enable-shared \
+		$(if $(CONFIG_IPV6),--enable-ipv6,--disable-ipv6) \
+		--disable-gopher \
+		--disable-ldap \
+		--disable-ldaps \
+		--disable-rtsp \
+		--disable-telnet \
+		--disable-tftp \
+		--disable-smtp \
+		--disable-pop3 \
+		--disable-imap \
+		--disable-sspi \
+		--disable-dict \
+		--disable-ares \
+		--disable-debug \
+		--disable-curldebug \
+		--disable-manual \
+		--disable-verbose \
+		--disable-tls-srp \
+		--disable-libcurl-option \
+		--disable-threaded-resolver \
+		--without-gnutls \
+		--without-ca-bundle \
+		--without-libidn \
+		--without-libssh2 \
+		--without-krb4 \
+		--without-nss \
+		--with-random=/dev/urandom \
+		--with-zlib=$(STAGEDIR) \
+		--with-ssl=$(STAGEDIR) \
 		--host=$(HOST_TARGET) \
 		--build=$(HOST_BUILD) ; \
 	)
 
 clean:
 	if [ -f $(SRC_NAME)/Makefile ] ; then \
-		$(MAKE) -C $(SRC_NAME) distclean ; \
+		$(MAKE) -C $(SRC_NAME) clean ; \
 	fi ; \
 	rm -f config_done
 
+install:
+	$(MAKE) -C $(SRC_NAME) install DESTDIR=""
+
 romfs:
-	$(ROMFSINST) -p +x $(THISDIR)/$(SRC_NAME)/socat /usr/bin/socat
+ifeq ($(CONFIG_FIRMWARE_INCLUDE_CURL),y)
+	$(ROMFSINST) -d $(DESTDIR)/bin/curl /usr/bin/curl
+endif
+	cp -fP $(DESTDIR)/lib/libcurl.so* $(ROMFSDIR)/lib
