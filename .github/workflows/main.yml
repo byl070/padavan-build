@@ -32,7 +32,7 @@ jobs:
         KERNEL: 4.4
       run: |
         if [ $KERNEL = "4.4" ] ; then
-        git clone --depth=1 https://github.com/byl070/padavan-4.4-old.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/byl070/padavan-4.4.git /opt/rt-n56u
         else
         exit 1
         fi
@@ -44,7 +44,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: HC5962
+        TNAME: RM2100
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
