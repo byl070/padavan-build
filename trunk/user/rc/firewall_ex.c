@@ -2218,4 +2218,3 @@ start_firewall_ex(void)
 	module_smart_unload("iptable_mangle", 0);
 	module_smart_unload("ip6table_mangle", 0);
 }
-
