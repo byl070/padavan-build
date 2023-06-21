@@ -1174,4 +1174,3 @@ manual_ddns_hostname_check(void)
 {
 	nvram_set_temp("ddns_return_code", "inadyn_unsupport");
 }
-
