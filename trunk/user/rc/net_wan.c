@@ -2728,4 +2728,3 @@ int stop_udhcpc_viptv(void)
 	snprintf(pidfile, sizeof(pidfile), "/var/run/udhcpc_viptv.pid");
 	return kill_pidfile(pidfile);
 }
-
