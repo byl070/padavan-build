@@ -9,7 +9,7 @@ include $(ROOTDIR)/user/shared/boards.mk
 PROJECT_HOME_URL="https:\/\/bitbucket.org\/padavan\/"
 PROJECT_HOME_URL_MOD="https:\/\/github.com\/"
 
-LABEL_COPYRIGHT_TEXT='© 2011-2021 <a href="https:\/\/bitbucket.org\/padavan" target="blank">Padavan<\/a> for Router'
+LABEL_COPYRIGHT_TEXT='© 2011-2021 <a href="https:\/\/bitbucket.org\/padavan" target="blank">Padavan-4.4<\/a> for Router'
 
 BOARD_PATTERN=s/ZVMODELVZ/$(CONFIG_FIRMWARE_PRODUCT_ID)/g
 COPYR_PATTERN=s/ZVCOPYRVZ/$(LABEL_COPYRIGHT_TEXT)/g
