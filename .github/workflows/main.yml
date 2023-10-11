@@ -35,7 +35,7 @@ jobs:
         else
         exit 1
         fi
-        git clone https://github.com/byl070/padavan-build-old.git /opt/new
+        git clone https://github.com/byl070/padavan-build.git /opt/new
         cp -rf /opt/new/trunk /opt/rt-n56u
         rm -rf /opt/new
         cd /opt/rt-n56u/toolchain-mipsel
