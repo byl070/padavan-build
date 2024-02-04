@@ -2,8 +2,10 @@
 
 start_wg() {
 	localip="$(nvram get wireguard_localip)"
+	listenport="$(nvram get wireguard_listenport)"
 	privatekey="$(nvram get wireguard_localkey)"
 	peerkey="$(nvram get wireguard_peerkey)"
+	presharedkey="$(nvram get wireguard_presharedkey)"
 	peerip="$(nvram get wireguard_peerip)"
 	logger -t "WIREGUARD" "正在启动wireguard"
 	ifconfig wg0 down
