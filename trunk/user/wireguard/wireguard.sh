@@ -13,9 +13,11 @@ start_wg() {
 	ip link add dev wg0 type wireguard
 	ip link set dev wg0 mtu 1420
 	ip addr add $localip dev wg0
+	wg set wg0 listenport $listenport
 	echo "$privatekey" > /tmp/privatekey
 	wg set wg0 private-key /tmp/privatekey
-	wg set wg0 peer $peerkey persistent-keepalive 25 allowed-ips 0.0.0.0/0 endpoint $peerip
+	echo "$presharedkey" > /tmp/presharedkey
+	wg set wg0 peer $peerkey preshared-key /tmp/presharedkey persistent-keepalive 25 allowed-ips 0.0.0.0/0 endpoint $peerip
 	iptables -t nat -A POSTROUTING -o wg0 -j MASQUERADE
 	ifconfig wg0 up
 }
