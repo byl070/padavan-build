@@ -167,7 +167,7 @@ function done_validating(action){
 										<tr>
 										<th>配置文件</th>
 				<td>
-					<textarea class="input" name="wireguard_conf" id="wireguard_conf" style="width: 60%; height:30vh;" value="<% nvram_get_x("","wireguard_conf"); %>" /></textarea>
+					<textarea class="input" name="wireguard_conf" id="wireguard_conf" style="width: 60%; height:20vh;" value="<% nvram_get_x("","wireguard_conf"); %>" /></textarea>
 				</td>
 
 										</tr>
