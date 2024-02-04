@@ -149,7 +149,7 @@ function done_validating(action){
 
 
 										<tr>
-										<th width="30%" style="border-top: 0 none;">启用wireguard</th>
+										<th width="30%" style="border-top: 0 none;">启用wireguard客户端</th>
 											<td style="border-top: 0 none;">
 													<div class="main_itoggle">
 													<div id="wireguard_enable_on_of">
@@ -165,9 +165,32 @@ function done_validating(action){
 										</tr>
 
 										<tr>
-										<th>配置文件</th>
+										<th>本机密钥key </th>
 				<td>
-					<textarea class="input" name="wireguard_conf" id="wireguard_conf" style="width: 60%; height:20vh;" value="<% nvram_get_x("","wireguard_conf"); %>" /></textarea>
+					<input type="text" class="input" name="wireguard_localkey" id="wireguard_localkey" style="width: 200px" value="<% nvram_get_x("","wireguard_localkey"); %>" />
+				</td>
+
+										</tr>
+
+										<tr>
+										<th>本机IP（格式 10.0.0.2/24）</th>
+				<td>
+					<input type="text" class="input" name="wireguard_localip" id="wireguard_localip" style="width: 200px" value="<% nvram_get_x("","wireguard_localip"); %>" />
+				</td>
+
+										</tr>
+									
+										<tr>
+										<th>对端密钥key </th>
+				<td>
+					<input type="text" class="input" name="wireguard_peerkey" id="wireguard_peerkey" style="width: 200px" value="<% nvram_get_x("","wireguard_peerkey"); %>" />
+				</td>
+
+										</tr>
+										<tr>
+										<th>对端ip:端口（格式 223.5.6.6:4900)</th>
+				<td>
+					<input type="text" class="input" name="wireguard_peerip" id="wireguard_peerip" style="width: 200px" value="<% nvram_get_x("","wireguard_peerip"); %>" />
 				</td>
 
 										</tr>
