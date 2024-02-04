@@ -165,7 +165,7 @@ function done_validating(action){
 										</tr>
 
 										<tr>
-										<th>本机IP（格式 10.0.0.2/24）</th>
+										<th>本机IP/掩码（格式 10.0.0.2/24）</th>
 				<td>
 					<input type="text" class="input" name="wireguard_localip" id="wireguard_localip" style="width: 200px" value="<% nvram_get_x("","wireguard_localip"); %>" />
 				</td>
@@ -173,7 +173,15 @@ function done_validating(action){
 										</tr>
 									
 										<tr>
-										<th>本机私钥key </th>
+										<th>监听端口 ListenPort </th>
+				<td>
+					<input type="text" class="input" name="wireguard_listenport" id="wireguard_listenport" style="width: 200px" value="<% nvram_get_x("","wireguard_listenport"); %>" />
+				</td>
+
+										</tr>
+									
+										<tr>
+										<th>本机私钥 PrivateKey </th>
 				<td>
 					<input type="text" class="input" name="wireguard_localkey" id="wireguard_localkey" style="width: 200px" value="<% nvram_get_x("","wireguard_localkey"); %>" />
 				</td>
@@ -181,14 +189,14 @@ function done_validating(action){
 										</tr>
 
 										<tr>
-										<th>对端公钥key </th>
+										<th>对端公钥 PublicKey </th>
 				<td>
 					<input type="text" class="input" name="wireguard_peerkey" id="wireguard_peerkey" style="width: 200px" value="<% nvram_get_x("","wireguard_peerkey"); %>" />
 				</td>
 
 										</tr>
 										<tr>
-										<th>对端ip:端口（格式 223.5.6.6:4900)</th>
+										<th>对端ip:端口（格式 1.2.3.4:51820)</th>
 				<td>
 					<input type="text" class="input" name="wireguard_peerip" id="wireguard_peerip" style="width: 200px" value="<% nvram_get_x("","wireguard_peerip"); %>" />
 				</td>
