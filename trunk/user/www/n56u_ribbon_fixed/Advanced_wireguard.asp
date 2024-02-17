@@ -203,14 +203,14 @@ function done_validating(action){
 
 										</tr>
 										<tr>
-										<th>对端ip:端口（格式 1.2.3.4:51820)</th>
+										<th>对端地址（格式 1.2.3.4:51820)</th>
 				<td>
 					<input type="text" class="input" name="wireguard_peerip" id="wireguard_peerip" style="width: 200px" value="<% nvram_get_x("","wireguard_peerip"); %>" />
 				</td>
 
 										</tr>
 										<tr>
-											<td colspan="4" style="border-top: 0 none;">
+											<td colspan="6" style="border-top: 0 none;">
 												<br />
 												<center><input class="btn btn-primary" style="width: 219px" type="button" value="<#CTL_apply#>" onclick="applyRule()" /></center>
 											</td>
