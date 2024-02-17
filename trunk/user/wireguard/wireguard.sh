@@ -22,8 +22,7 @@ start_wg() {
 
 
 stop_wg() {
-	ip link set dev wg0 down
-	ip link del dev wg0
+	ip link show wg0 >/dev/null 2>&1 && ip link set dev wg0 down && ip link del dev wg0
 	logger -t "WIREGUARD" "正在关闭wireguard"
 	}
 
