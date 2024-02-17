@@ -22,8 +22,15 @@ start_wg() {
 
 
 stop_wg() {
-	ip link show wg0 >/dev/null 2>&1 && ip link set dev wg0 down && ip link del dev wg0
-	logger -t "WIREGUARD" "正在关闭wireguard"
+	if [ ip link show wg0 >/dev/null 2>&1 ]; then
+		iptables -D INPUT -i wg0 -j ACCEPT
+		iptables -D FORWARD -i wg0 -j ACCEPT
+		iptables -t nat -D POSTROUTING -o wg0 -j MASQUERADE
+		ip link set dev wg0 down
+		ip link del dev wg0
+		awk -F" += +" 'match($1,"^ *PostDown$"){system($2)}' $conf
+		logger -t "WIREGUARD" "已经关闭wireguard"
+	fi
 	}
 
 
