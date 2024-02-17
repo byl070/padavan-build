@@ -40,7 +40,7 @@ start_wg() {
 
 
 stop_wg() {
-	if [ ip link show wg0 >/dev/null 2>&1 ]; then
+	if ip link show wg0 >/dev/null 2>&1; then
 		iptables -D INPUT -i wg0 -j ACCEPT
 		iptables -D FORWARD -i wg0 -j ACCEPT
 		iptables -t nat -D POSTROUTING -o wg0 -j MASQUERADE
