@@ -8,8 +8,7 @@ start_wg() {
 	presharedkey="$(nvram get wireguard_peerkey| awk -F" *[\(\)] *" '{print $2}')"
 	peerip="$(nvram get wireguard_peerip)"
 	logger -t "WIREGUARD" "正在启动wireguard"
-	ip link set dev wg0 down
-	ip link del dev wg0
+	ip link show wg0 >/dev/null 2>&1 && ip link set dev wg0 down && ip link del dev wg0
 	ip link add dev wg0 type wireguard
 	ip link set dev wg0 mtu 1420
 	ip addr add $localip dev wg0
