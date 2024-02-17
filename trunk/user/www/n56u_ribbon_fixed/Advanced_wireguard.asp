@@ -211,7 +211,7 @@ function done_validating(action){
 
 										</tr>
 										<tr>
-										<th>路由网段（例 3.2.1.0/24）</th>
+										<th>路由网段（IP1/16,IP2/24）</th>
 				<td>
 					<input type="text" class="input" name="wireguard_routeip" id="wireguard_routeip" style="width: 200px" value="<% nvram_get_x("","wireguard_routeip"); %>" />
 				</td>
