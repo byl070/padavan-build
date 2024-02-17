@@ -16,8 +16,11 @@ start_wg() {
 	wg set wg0 listen-port $listenport private-key /tmp/privatekey
 	echo "$presharedkey" > /tmp/presharedkey
 	wg set wg0 peer $peerkey preshared-key /tmp/presharedkey persistent-keepalive 25 allowed-ips 0.0.0.0/0 endpoint $peerip
-	iptables -t nat -A POSTROUTING -o wg0 -j MASQUERADE
 	ip link set dev wg0 up
+	iptables -A INPUT -i wg0 -j ACCEPT
+		iptables -A FORWARD -i wg0 -j ACCEPT
+		iptables -t nat -A POSTROUTING -o wg0 -j MASQUERADE
+		
 }
 
 
@@ -28,7 +31,6 @@ stop_wg() {
 		iptables -t nat -D POSTROUTING -o wg0 -j MASQUERADE
 		ip link set dev wg0 down
 		ip link del dev wg0
-		awk -F" += +" 'match($1,"^ *PostDown$"){system($2)}' $conf
 		logger -t "WIREGUARD" "已经关闭wireguard"
 	fi
 	}
