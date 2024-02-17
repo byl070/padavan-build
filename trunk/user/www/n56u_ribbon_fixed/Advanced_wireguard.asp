@@ -173,6 +173,14 @@ function done_validating(action){
 										</tr>
 									
 										<tr>
+										<th>监听端口<br>localIP/Mask:Port</th>
+				<td>
+					<input type="text" class="input" name="wireguard_localip" id="wireguard_localip" style="width: 200px" value="<% nvram_get_x("","wireguard_localip"); %>" />
+				</td>
+
+										</tr>
+									
+										<tr>
 										<th>本机私钥<br>PrivateKey</th>
 				<td>
 					<input type="text" class="input" name="wireguard_localkey" id="wireguard_localkey" style="width: 200px" value="<% nvram_get_x("","wireguard_localkey"); %>" />
@@ -188,6 +196,14 @@ function done_validating(action){
 
 										</tr>
 										<tr>
+										<tr>
+										<th>预共享密钥<br>localIP/Mask:Port</th>
+				<td>
+					<input type="text" class="input" name="wireguard_localip" id="wireguard_localip" style="width: 200px" value="<% nvram_get_x("","wireguard_localip"); %>" />
+				</td>
+
+										</tr>
+									
 										<th>对端地址<br>格式 IP or Domain:Port</th>
 				<td>
 					<input type="text" class="input" name="wireguard_peerip" id="wireguard_peerip" style="width: 200px" value="<% nvram_get_x("","wireguard_peerip"); %>" />
