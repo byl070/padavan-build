@@ -203,7 +203,7 @@ function done_validating(action){
 
 										</tr>
 										<tr>
-										<th>对端地址（格式 1.2.3.4:51820)</th>
+										<th>对端地址（格式 IP:port)</th>
 				<td>
 					<input type="text" class="input" name="wireguard_peerip" id="wireguard_peerip" style="width: 200px" value="<% nvram_get_x("","wireguard_peerip"); %>" />
 				</td>
