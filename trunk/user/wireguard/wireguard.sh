@@ -4,8 +4,8 @@ start_wg() {
 	localip="$(nvram get wireguard_localip | awk -F" *: *" '{print $1}')"
 	listenport=$(nvram get wireguard_localip | awk -F" *: *" '{print $2}')
 	privatekey="$(nvram get wireguard_localkey)"
-	peerkey="$(nvram get wireguard_peerkey)"
-	presharedkey="$(nvram get wireguard_presharedkey| awk -F[()] '{print $1}')
+	peerkey="$(nvram get wireguard_peerkey| awk -F[\(\)] '{print $1}')"
+	presharedkey="$(nvram get wireguard_peerkey| awk -F[\(\)] '{print $2}')"
 	peerip="$(nvram get wireguard_peerip)"
 	logger -t "WIREGUARD" "正在启动wireguard"
 	ip link set dev wg0 down
