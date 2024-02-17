@@ -165,7 +165,7 @@ function done_validating(action){
 										</tr>
 
 										<tr>
-										<th>本机地址 （格式 10.10.0.1/24）</th>
+										<th>本机地址（格式 4.3.2.1/24）</th>
 				<td>
 					<input type="text" class="input" name="wireguard_localip" id="wireguard_localip" style="width: 200px" value="<% nvram_get_x("","wireguard_localip"); %>" />
 				</td>
@@ -173,7 +173,7 @@ function done_validating(action){
 										</tr>
 									
 										<tr>
-										<th>监听端口 ListenPort </th>
+										<th>监听端口（ListenPort）</th>
 				<td>
 					<input type="text" class="input" name="wireguard_port" id="wireguard_port" style="width: 200px" value="<% nvram_get_x("","wireguard_port"); %>" />
 				</td>
@@ -181,7 +181,7 @@ function done_validating(action){
 										</tr>
 									
 										<tr>
-										<th>本机私钥<br>PrivateKey</th>
+										<th>本机私钥（PrivateKey）</th>
 				<td>
 					<input type="text" class="input" name="wireguard_localkey" id="wireguard_localkey" style="width: 200px" value="<% nvram_get_x("","wireguard_localkey"); %>" />
 				</td>
@@ -189,7 +189,7 @@ function done_validating(action){
 										</tr>
 
 										<tr>
-										<th>对端公钥（预共享密钥）<br>PublicKey（PresharedKey）</th>
+										<th>对端公钥（PublicKey）</th>
 				<td>
 					<input type="text" class="input" name="wireguard_peerkey" id="wireguard_peerkey" style="width: 200px" value="<% nvram_get_x("","wireguard_peerkey"); %>" />
 				</td>
@@ -197,29 +197,29 @@ function done_validating(action){
 										</tr>
 										<tr>
 										<tr>
-										<th>预共享密钥<br>localIP/Mask:Port</th>
+										<th>预共享密钥（PresharedKey）</th>
 				<td>
-					<input type="text" class="input" name="wireguard_localip" id="wireguard_localip" style="width: 200px" value="<% nvram_get_x("","wireguard_localip"); %>" />
+					<input type="text" class="input" name="wireguard_prekey" id="wireguard_prekey" style="width: 200px" value="<% nvram_get_x("","wireguard_prekey"); %>" />
 				</td>
 
 										</tr>
 									
-										<th>对端地址<br>格式 IP or Domain:Port</th>
+										<th>对端地址（格式 公网IP:端口）</th>
 				<td>
 					<input type="text" class="input" name="wireguard_peerip" id="wireguard_peerip" style="width: 200px" value="<% nvram_get_x("","wireguard_peerip"); %>" />
 				</td>
 
 										</tr>
 										<tr>
-										<th>路由网段<br>localIP/Mask:Port</th>
+										<th>路由网段（格式 3.2.1.0/24）</th>
 				<td>
-					<input type="text" class="input" name="wireguard_localip" id="wireguard_localip" style="width: 200px" value="<% nvram_get_x("","wireguard_localip"); %>" />
+					<input type="text" class="input" name="wireguard_routeip" id="wireguard_routeip" style="width: 200px" value="<% nvram_get_x("","wireguard_routeip"); %>" />
 				</td>
 
 										</tr>
 									
 										<tr>
-											<td colspan="4" style="border-top: 0 none;">
+											<td colspan="7" style="border-top: 0 none;">
 												<br />
 												<center><input class="btn btn-primary" style="width: 219px" type="button" value="<#CTL_apply#>" onclick="applyRule()" /></center>
 											</td>
