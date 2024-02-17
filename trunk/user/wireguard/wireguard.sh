@@ -12,6 +12,9 @@ start_wg() {
 	ip link add dev wg0 type wireguard
 	ip link set dev wg0 mtu 1420
 	ip addr add $localip dev wg0
+ if [ -z $listenport ]; then
+		listenport=51820;
+	fi
 	echo "$privatekey" > /tmp/privatekey
 	wg set wg0 listen-port $listenport private-key /tmp/privatekey
 	echo "$presharedkey" > /tmp/presharedkey
