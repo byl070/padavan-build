@@ -7,8 +7,9 @@ start_wg() {
 	peerkey="$(nvram get wireguard_peerkey)"
 	presharedkey="$(nvram get wireguard_prekey)"
 	peerip="$(nvram get wireguard_peerip)"
+	routeip="$(nvram get wireguard_routeip)"
 	if [ -z $localip ] || [ -z $privatekey ] || [ -z $peerkey ]; then
-	 logger -t "WIREGUARD" "Start Error"
+	 logger -t "WIREGUARD" "Config Error"
 		exit 0
 	fi
 	logger -t "WIREGUARD" "Wireguard Startting"
@@ -16,15 +17,22 @@ start_wg() {
 	ip link add dev wg0 type wireguard
 	ip link set dev wg0 mtu 1420
 	ip addr add $localip dev wg0
- if [ -z $listenport ]; then listenport=51820; fi
+ if [ "$listenport" ]; then
+		wg set wg0 listen-port $listenport
+	fi
 	echo "$privatekey" > /tmp/privatekey
-	wg set wg0 listen-port $listenport private-key /tmp/privatekey
+	wg set wg0 private-key /tmp/privatekey
 	if [ "$presharedkey" ]; then
 	 echo "$presharedkey" > /tmp/presharedkey
 		wg set wg0 peer $peerkey preshared-key /tmp/presharedkey
 	fi
-	wg set wg0 peer $peerkey persistent-keepalive 25 allowed-ips 0.0.0.0/0 endpoint $peerip
+	wg set wg0 peer $peerkey persistent-keepalive 30 allowed-ips 0.0.0.0/0 endpoint $peerip
 	ip link set dev wg0 up
+	if [ "$routeip" ]; then 
+		for ip in ${routeip//,/ }; do
+			ip route add $ip dev wg0
+		done
+	fi
 	iptables -A INPUT -i wg0 -j ACCEPT
 	iptables -A FORWARD -i wg0 -j ACCEPT
 	iptables -t nat -A POSTROUTING -o wg0 -j MASQUERADE
