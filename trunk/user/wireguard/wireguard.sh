@@ -9,8 +9,7 @@ start_wg() {
 	peerip="$(nvram get wireguard_peerip)"
 	routeip="$(nvram get wireguard_routeip)"
 	if [ -z $localip ] || [ -z $privatekey ] || [ -z $peerkey ]; then
-		logger -t "WIREGUARD" "Config Error"
-		exit 0
+		logger -t "WIREGUARD" "Config Error" && exit 0
 	fi
 	logger -t "WIREGUARD" "Wireguard Startting"
 	ip link show wg0 >/dev/null 2>&1 && ip link set dev wg0 down && ip link del dev wg0
