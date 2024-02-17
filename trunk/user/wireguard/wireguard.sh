@@ -11,7 +11,7 @@ start_wg() {
 	if [ -z $localip ] || [ -z $privatekey ] || [ -z $peerkey ]; then
 		logger -t "WIREGUARD" "Config Error" && exit 0
 	fi
-	logger -t "WIREGUARD" "Wireguard Startting"
+	logger -t "WIREGUARD" "Wireguard is Start"
 	ip link show wg0 >/dev/null 2>&1 && ip link set dev wg0 down && ip link del dev wg0
 	ip link add dev wg0 type wireguard
 	ip link set dev wg0 mtu 1420
@@ -46,7 +46,7 @@ stop_wg() {
 		iptables -t nat -D POSTROUTING -o wg0 -j MASQUERADE
 		ip link set dev wg0 down
 		ip link del dev wg0
-		logger -t "WIREGUARD" "已经关闭wireguard"
+		logger -t "WIREGUARD" "Wireguard is Stop"
 	fi
 	}
 
