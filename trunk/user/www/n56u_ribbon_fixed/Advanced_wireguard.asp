@@ -165,7 +165,7 @@ function done_validating(action){
 										</tr>
 
 										<tr>
-										<th>本机IP/掩码（格式 10.0.0.2/24）</th>
+										<th>本机参数<br>localIP/Mask:Port</th>
 				<td>
 					<input type="text" class="input" name="wireguard_localip" id="wireguard_localip" style="width: 200px" value="<% nvram_get_x("","wireguard_localip"); %>" />
 				</td>
@@ -181,7 +181,7 @@ function done_validating(action){
 										</tr>
 									
 										<tr>
-										<th>本机私钥 PrivateKey </th>
+										<th>本机私钥<br>PrivateKey</th>
 				<td>
 					<input type="text" class="input" name="wireguard_localkey" id="wireguard_localkey" style="width: 200px" value="<% nvram_get_x("","wireguard_localkey"); %>" />
 				</td>
@@ -189,28 +189,28 @@ function done_validating(action){
 										</tr>
 
 										<tr>
-										<th>对端公钥 PublicKey </th>
+										<th>对端公钥<br>PublicKey</th>
 				<td>
 					<input type="text" class="input" name="wireguard_peerkey" id="wireguard_peerkey" style="width: 200px" value="<% nvram_get_x("","wireguard_peerkey"); %>" />
 				</td>
 
 										</tr>
 										<tr>
-										<th>预共享密钥 PresharedKey </th>
+										<th>预共享密钥 PresharedKey</th>
 				<td>
 					<input type="text" class="input" name="wireguard_presharedkey" id="wireguard_presharedkey" style="width: 200px" value="<% nvram_get_x("","wireguard_presharedkey"); %>" />
 				</td>
 
 										</tr>
 										<tr>
-										<th>对端地址（格式 IP:port)</th>
+										<th>对端地址<br>格式 IP(Domain):port</th>
 				<td>
 					<input type="text" class="input" name="wireguard_peerip" id="wireguard_peerip" style="width: 200px" value="<% nvram_get_x("","wireguard_peerip"); %>" />
 				</td>
 
 										</tr>
 										<tr>
-											<td colspan="6" style="border-top: 0 none;">
+											<td colspan="4" style="border-top: 0 none;">
 												<br />
 												<center><input class="btn btn-primary" style="width: 219px" type="button" value="<#CTL_apply#>" onclick="applyRule()" /></center>
 											</td>
