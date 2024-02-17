@@ -165,17 +165,9 @@ function done_validating(action){
 										</tr>
 
 										<tr>
-										<th>本机参数<br>localIP/Mask:Port</th>
+										<th>本机地址<br>localIP/Mask:Port</th>
 				<td>
 					<input type="text" class="input" name="wireguard_localip" id="wireguard_localip" style="width: 200px" value="<% nvram_get_x("","wireguard_localip"); %>" />
-				</td>
-
-										</tr>
-									
-										<tr>
-										<th>监听端口 ListenPort </th>
-				<td>
-					<input type="text" class="input" name="wireguard_listenport" id="wireguard_listenport" style="width: 200px" value="<% nvram_get_x("","wireguard_listenport"); %>" />
 				</td>
 
 										</tr>
