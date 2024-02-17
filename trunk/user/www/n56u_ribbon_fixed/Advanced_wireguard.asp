@@ -211,6 +211,14 @@ function done_validating(action){
 
 										</tr>
 										<tr>
+										<th>路由网段<br>localIP/Mask:Port</th>
+				<td>
+					<input type="text" class="input" name="wireguard_localip" id="wireguard_localip" style="width: 200px" value="<% nvram_get_x("","wireguard_localip"); %>" />
+				</td>
+
+										</tr>
+									
+										<tr>
 											<td colspan="4" style="border-top: 0 none;">
 												<br />
 												<center><input class="btn btn-primary" style="width: 219px" type="button" value="<#CTL_apply#>" onclick="applyRule()" /></center>
