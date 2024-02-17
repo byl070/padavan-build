@@ -181,21 +181,14 @@ function done_validating(action){
 										</tr>
 
 										<tr>
-										<th>对端公钥<br>PublicKey</th>
+										<th>对端公钥（预共享密钥）<br>PublicKey（PresharedKey）</th>
 				<td>
 					<input type="text" class="input" name="wireguard_peerkey" id="wireguard_peerkey" style="width: 200px" value="<% nvram_get_x("","wireguard_peerkey"); %>" />
 				</td>
 
 										</tr>
 										<tr>
-										<th>预共享密钥 PresharedKey</th>
-				<td>
-					<input type="text" class="input" name="wireguard_presharedkey" id="wireguard_presharedkey" style="width: 200px" value="<% nvram_get_x("","wireguard_presharedkey"); %>" />
-				</td>
-
-										</tr>
-										<tr>
-										<th>对端地址<br>格式 IP(Domain):port</th>
+										<th>对端地址<br>格式 IP or Domain:Port</th>
 				<td>
 					<input type="text" class="input" name="wireguard_peerip" id="wireguard_peerip" style="width: 200px" value="<% nvram_get_x("","wireguard_peerip"); %>" />
 				</td>
