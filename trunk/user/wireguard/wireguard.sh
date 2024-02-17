@@ -7,18 +7,23 @@ start_wg() {
 	peerkey="$(nvram get wireguard_peerkey)"
 	presharedkey="$(nvram get wireguard_prekey)"
 	peerip="$(nvram get wireguard_peerip)"
-	logger -t "WIREGUARD" "正在启动wireguard"
+	if [ -z $localip ] || [ -z $privatekey ] || [ -z $peerkey ]; then
+	 logger -t "WIREGUARD" "Start Error"
+		exit 0
+	fi
+	logger -t "WIREGUARD" "Wireguard Startting"
 	ip link show wg0 >/dev/null 2>&1 && ip link set dev wg0 down && ip link del dev wg0
 	ip link add dev wg0 type wireguard
 	ip link set dev wg0 mtu 1420
 	ip addr add $localip dev wg0
- if [ -z $listenport ]; then
-		listenport=51820;
-	fi
+ if [ -z $listenport ]; then listenport=51820; fi
 	echo "$privatekey" > /tmp/privatekey
 	wg set wg0 listen-port $listenport private-key /tmp/privatekey
-	echo "$presharedkey" > /tmp/presharedkey
-	wg set wg0 peer $peerkey preshared-key /tmp/presharedkey persistent-keepalive 25 allowed-ips 0.0.0.0/0 endpoint $peerip
+	if [ "$presharedkey" ]; then
+	 echo "$presharedkey" > /tmp/presharedkey
+		wg set wg0 peer $peerkey preshared-key /tmp/presharedkey
+	fi
+	wg set wg0 peer $peerkey persistent-keepalive 25 allowed-ips 0.0.0.0/0 endpoint $peerip
 	ip link set dev wg0 up
 	iptables -A INPUT -i wg0 -j ACCEPT
 	iptables -A FORWARD -i wg0 -j ACCEPT
