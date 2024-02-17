@@ -2,8 +2,7 @@
 
 start_wg() {
 	localip=$(nvram get wireguard_localip | awk -F" *: *" '{print $1}')
-	port=$(nvram get wireguard_localip | awk -F" *: *" '{print $2}')
-	listenport="$(nvram get wireguard_listenport)"
+	listenport=$(nvram get wireguard_localip | awk -F" *: *" '{print $2}')
 	privatekey="$(nvram get wireguard_localkey)"
 	peerkey="$(nvram get wireguard_peerkey)"
 	presharedkey="$(nvram get wireguard_presharedkey)"
