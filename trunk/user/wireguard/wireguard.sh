@@ -18,8 +18,8 @@ start_wg() {
 	wg set wg0 peer $peerkey preshared-key /tmp/presharedkey persistent-keepalive 25 allowed-ips 0.0.0.0/0 endpoint $peerip
 	ip link set dev wg0 up
 	iptables -A INPUT -i wg0 -j ACCEPT
-		iptables -A FORWARD -i wg0 -j ACCEPT
-		iptables -t nat -A POSTROUTING -o wg0 -j MASQUERADE
+	iptables -A FORWARD -i wg0 -j ACCEPT
+	iptables -t nat -A POSTROUTING -o wg0 -j MASQUERADE
 		
 }
 
