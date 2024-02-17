@@ -29,7 +29,7 @@ start_wg() {
 	ip link set dev wg0 up
 	if [ "$routeip" ]; then 
 		for ip in ${routeip//,/ }; do
-			ip route add $ip dev wg0
+			ip route add $ip dev wg0 || logger -t "WIREGUARD" "Route $ip Error"
 		done
 	fi
 	iptables -A INPUT -i wg0 -j ACCEPT
