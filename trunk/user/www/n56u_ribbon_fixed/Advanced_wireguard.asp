@@ -165,7 +165,7 @@ function done_validating(action){
 										</tr>
 
 										<tr>
-										<th>本机地址（例 4.3.2.1/24）</th>
+										<th>本机地址（10.10.0.1/24）</th>
 				<td>
 					<input type="text" class="input" name="wireguard_localip" id="wireguard_localip" style="width: 200px" value="<% nvram_get_x("","wireguard_localip"); %>" />
 				</td>
@@ -196,6 +196,20 @@ function done_validating(action){
 
 										</tr>
 										<tr>
+										<th>对端地址（IP|Domain:port）</th>
+				<td>
+					<input type="text" class="input" name="wireguard_peerip" id="wireguard_peerip" style="width: 200px" value="<% nvram_get_x("","wireguard_peerip"); %>" />
+				</td>
+
+										</tr>
+										<tr>
+										<th>路由网段（IP1/24,IP2/24）</th>
+				<td>
+					<input type="text" class="input" name="wireguard_routeip" id="wireguard_routeip" style="width: 200px" value="<% nvram_get_x("","wireguard_routeip"); %>" />
+				</td>
+
+										</tr>
+									
 										<tr>
 										<th>预共享密钥（PresharedKey）</th>
 				<td>
@@ -203,21 +217,6 @@ function done_validating(action){
 				</td>
 
 										</tr>
-									
-										<th>对端地址（IPv4/IPv6:port）</th>
-				<td>
-					<input type="text" class="input" name="wireguard_peerip" id="wireguard_peerip" style="width: 200px" value="<% nvram_get_x("","wireguard_peerip"); %>" />
-				</td>
-
-										</tr>
-										<tr>
-										<th>路由网段（IP1/16,IP2/24）</th>
-				<td>
-					<input type="text" class="input" name="wireguard_routeip" id="wireguard_routeip" style="width: 200px" value="<% nvram_get_x("","wireguard_routeip"); %>" />
-				</td>
-
-										</tr>
-									
 										<tr>
 											<td colspan="7" style="border-top: 0 none;">
 												<br />
