@@ -22,7 +22,7 @@ start_wg() {
 	wg set wg0 peer $peerkey persistent-keepalive 30 allowed-ips 0.0.0.0/0 endpoint $peerip
 	ip link set dev wg0 up
 	for ip in ${routeip//,/ }; do
-			ip route add $ip dev wg0 || logger -t "WIREGUARD" "Route $ip Error"
+		ip route add $ip dev wg0 || logger -t "WIREGUARD" "Route $ip Error"
 	done
 	iptables -A INPUT -i wg0 -j ACCEPT
 	iptables -A FORWARD -i wg0 -j ACCEPT
