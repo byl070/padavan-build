@@ -21,11 +21,9 @@ start_wg() {
 	[ "$presharedkey" ] && echo "$presharedkey" > /tmp/presharedkey && wg set wg0 peer $peerkey preshared-key /tmp/presharedkey
 	wg set wg0 peer $peerkey persistent-keepalive 30 allowed-ips 0.0.0.0/0 endpoint $peerip
 	ip link set dev wg0 up
-	if [ "$routeip" ]; then 
-		for ip in ${routeip//,/ }; do
+	for ip in ${routeip//,/ }; do
 			ip route add $ip dev wg0 || logger -t "WIREGUARD" "Route $ip Error"
-		done
-	fi
+	done
 	iptables -A INPUT -i wg0 -j ACCEPT
 	iptables -A FORWARD -i wg0 -j ACCEPT
 }
