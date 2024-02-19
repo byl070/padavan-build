@@ -16,8 +16,7 @@ start_wg() {
 	ip link add dev wg0 type wireguard
 	ip link set dev wg0 mtu 1420
 	ip addr add $localip dev wg0
-	echo "$privatekey" > /tmp/privatekey
-	wg set wg0 private-key /tmp/privatekey
+	echo "$privatekey" > /tmp/privatekey && wg set wg0 private-key /tmp/privatekey
 	[ "$listenport" ] && wg set wg0 listen-port $listenport
 	[ "$presharedkey" ] && echo "$presharedkey" > /tmp/presharedkey && wg set wg0 peer $peerkey preshared-key /tmp/presharedkey
 	wg set wg0 peer $peerkey persistent-keepalive 30 allowed-ips 0.0.0.0/0 endpoint $peerip
