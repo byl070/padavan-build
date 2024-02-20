@@ -11,8 +11,6 @@ start_wg() {
 	if [ -z $localip ] || [ -z $privatekey ] || [ -z $peerkey ]; then
 		logger -t "WIREGUARD" "Config Error" && exit 0
 	fi
-	logger -t "WIREGUARD" "Wireguard is Start"
-	ip link show wg0 >/dev/null 2>&1 && ip link set dev wg0 down && ip link del dev wg0
 	ip link add dev wg0 type wireguard
 	ip link set dev wg0 mtu 1420
 	ip addr add $localip dev wg0
@@ -20,7 +18,7 @@ start_wg() {
 	[ "$listenport" ] && wg set wg0 listen-port $listenport
 	[ "$presharedkey" ] && echo "$presharedkey" > /tmp/presharedkey && wg set wg0 peer $peerkey preshared-key /tmp/presharedkey
 	wg set wg0 peer $peerkey persistent-keepalive 30 allowed-ips 0.0.0.0/0 endpoint $peerip
-	ip link set dev wg0 up
+	ip link set dev wg0 up && logger -t "WIREGUARD" "Wireguard is Start"
 	for ip in ${routeip//,/ }; do
 		ip route add $ip dev wg0 || logger -t "WIREGUARD" "Route $ip Error"
 	done
@@ -42,7 +40,7 @@ stop_wg() {
 
 case $1 in
 start)
-	start_wg
+	stop_wg;start_wg
 	;;
 stop)
 	stop_wg
