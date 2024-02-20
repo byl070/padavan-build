@@ -30,8 +30,8 @@ start_wg() {
 
 stop_wg() {
 	if ip link show wg0 >/dev/null 2>&1; then
-		iptables -D INPUT -i wg0 -j ACCEPT
-		iptables -D FORWARD -i wg0 -j ACCEPT
+		iptables -D INPUT -i wg0 -j ACCEPT >/dev/null 2>&1
+		iptables -D FORWARD -i wg0 -j ACCEPT >/dev/null 2>&1
 		ip link set dev wg0 down && ip link del dev wg0
 		logger -t "WIREGUARD" "Wireguard is Stop"
 	fi
