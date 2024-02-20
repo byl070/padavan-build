@@ -9,7 +9,7 @@ start_wg() {
 	peerip="$(nvram get wireguard_peerip)"
 	routeip="$(nvram get wireguard_routeip)"
 	if [ -z $localip ] || [ -z $privatekey ] || [ -z $peerkey ]; then
-		logger -t "WIREGUARD" "Config Error" && exit "Wireguard Config Error"
+		logger -t "WIREGUARD" "Config Error" && exit "Config Error"
 	fi
 	ip link add dev wg0 type wireguard
 	ip link set dev wg0 mtu 1420
