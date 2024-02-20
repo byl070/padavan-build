@@ -34,7 +34,7 @@ stop_wg() {
 	fi
 	iptables -D INPUT -i wg0 -j ACCEPT >/dev/null 2>&1
 	iptables -D FORWARD -i wg0 -j ACCEPT >/dev/null 2>&1
-	}
+}
 
 
 
