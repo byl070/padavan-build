@@ -32,7 +32,7 @@ start_wg() {
 		 iptables -A wireguard -p $ip -j ACCEPT
 		else
 		 logger -t "WIREGUARD" "Route $ip Error"
-			echo "Route $ip Error"
+		echo "Route $ip Error"
 		fi
 	done
 }
