@@ -11,6 +11,8 @@ start_wg() {
 	if [ -z $localip ] || [ -z $privatekey ] || [ -z $peerkey ]; then
 		logger -t "WIREGUARD" "Config Error" && exit "Config Error"
 	fi
+	ip link set dev wg0 down 2>/dev/null
+	ip link del dev wg0 2>/dev/null
 	ip link add dev wg0 type wireguard
 	ip link set dev wg0 mtu 1420
 	ip addr add $localip dev wg0
@@ -44,7 +46,7 @@ stop_wg() {
 
 case $1 in
 start)
-	stop_wg;start_wg
+	start_wg
 	;;
 stop)
 	stop_wg
