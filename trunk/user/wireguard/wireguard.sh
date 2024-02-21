@@ -23,10 +23,8 @@ start_wg() {
 	ip link set dev wg0 up && logger -t "WIREGUARD" "Wireguard is Start"
 	iptables -N wireguard 2>/dev/null
 	iptables -F wireguard
-	iptables -D INPUT -i wg0 -j wireguard 2>/dev/null
-	iptables -A INPUT -i wg0 -j wireguard
-	iptables -D FORWARD -i wg0 -j wireguard 2>/dev/null
-	iptables -A FORWARD -i wg0 -j wireguard
+	iptables -C INPUT -i wg0 -j wireguard 2>/dev/null || iptables -A INPUT -i wg0 -j wireguard
+	iptables -C FORWARD -i wg0 -j wireguard 2>/dev/null || iptables -A FORWARD -i wg0 -j wireguard
 	for ip in ${routeip//,/ }; do
 		if ip route add $ip dev wg0 2>/dev/null; then
 		 iptables -A wireguard -s $ip -j ACCEPT
