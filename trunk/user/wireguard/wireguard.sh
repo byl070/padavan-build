@@ -32,14 +32,14 @@ start_wg() {
 
 
 stop_wg() {
-	if ip link show wg0 >/dev/null 2>&1; then
-		ip link set dev wg0 down && ip link del dev wg0
+	if ip link set dev wg0 down 2>/dev/null; then
+	 ip link del dev wg0
 		logger -t "WIREGUARD" "Wireguard is Stop"
+	 iptables -D INPUT -i wg0 -j wireguard 2>/dev/null
+	 iptables -D FORWARD -i wg0 -j wireguard 2>/dev/null
+	 iptables -F wireguard 2>/dev/null
+	 iptables -X wireguard 2>/dev/null
 	fi
-	iptables -D INPUT -i wg0 -j wireguard 2>/dev/null
-	iptables -D FORWARD -i wg0 -j wireguard 2>/dev/null
-	iptables -F wireguard 2>/dev/null
-	iptables -X wireguard 2>/dev/null
 }
 
 
