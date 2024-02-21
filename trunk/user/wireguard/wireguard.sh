@@ -8,9 +8,10 @@ start_wg() {
 	presharedkey="$(nvram get wireguard_prekey)"
 	peerip="$(nvram get wireguard_peerip)"
 	routeip="$(nvram get wireguard_routeip)"
-	if [ -z $localip ] || [ -z $privatekey ] || [ -z $peerkey ]; then
-		logger -t "WIREGUARD" "Config Error" && exit "Config Error"
-	fi
+	[ -z $localip ] && err="LocalIP is empty"
+	[ -z $privatekey ] && err="Local PrivateKey is empty"
+	[ -z $peerkey ] && err="Peer PublicKey is empty"
+	[ "$err" ] && logger -t "WIREGUARD" "Start Error,$err" && exit "Start Error,$err"
 	ip link set dev wg0 down 2>/dev/null
 	ip link del dev wg0 2>/dev/null
 	ip link add dev wg0 type wireguard
