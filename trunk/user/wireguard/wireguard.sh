@@ -11,7 +11,7 @@ start_wg() {
 	[ ! $localip ] && err="LocalIP is empty"
 	[ ! $privatekey ] && [ ! $err ] && err="Local PrivateKey is empty"
 	[ ! $peerkey ] && [ ! $err ] && err="Peer PublicKey is empty"
-	[ $err ] && logger -t "WIREGUARD" "Start Error,$err" && exit "Start Error,$err"
+	[ "$err" ] && logger -t "WIREGUARD" "Start Error,$err" && exit "Start Error,$err"
 	ip link set dev wg0 down 2>/dev/null
 	ip link del dev wg0 2>/dev/null
 	ip link add dev wg0 type wireguard
