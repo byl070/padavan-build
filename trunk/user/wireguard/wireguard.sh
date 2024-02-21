@@ -37,7 +37,7 @@ stop_wg() {
 	iptables -D INPUT -i wg0 -j wireguard 2>/dev/null
 	iptables -D FORWARD -i wg0 -j wireguard 2>/dev/null
 	iptables -F wireguard 2>/dev/null
-	iptables -X wireguard
+	iptables -X wireguard 2>/dev/null
 }
 
 
