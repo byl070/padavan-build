@@ -29,7 +29,7 @@ start_wg() {
 	iptables -A FORWARD -i wg0 -j wireguard
 	for ip in ${routeip//,/ }; do
 		if ip route add $ip dev wg0 2>/dev/null; then
-		 iptables -A wireguard -p $ip -j ACCEPT
+		 iptables -A wireguard -s $ip -j ACCEPT
 		else
 		 logger -t "WIREGUARD" "Route $ip Error"
 		 echo "Route $ip Error"
