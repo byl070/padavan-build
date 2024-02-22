@@ -22,8 +22,7 @@ start_wg() {
 	[ "$presharedkey" ] && echo $presharedkey > /tmp/presharedkey && wg set wg0 peer $peerkey preshared-key /tmp/presharedkey
 	wg set wg0 peer $peerkey persistent-keepalive 30 allowed-ips 0.0.0.0/0 endpoint $peerip
 	ip link set dev wg0 up && logger -t "WIREGUARD" "Wireguard is Start"
-	iptables -N wireguard 2>/dev/null
-	iptables -F wireguard
+	iptables -N wireguard 2>/dev/null && iptables -F wireguard
 	iptables -C INPUT -i wg0 -j wireguard 2>/dev/null || iptables -A INPUT -i wg0 -j wireguard
 	iptables -C FORWARD -i wg0 -j wireguard 2>/dev/null || iptables -A FORWARD -i wg0 -j wireguard
 	for ip in ${routeip//,/ }; do
