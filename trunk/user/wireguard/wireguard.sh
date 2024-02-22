@@ -16,7 +16,7 @@ start_wg() {
 	ip link del dev wg0 2>/dev/null
 	ip link add dev wg0 type wireguard
 	ip link set dev wg0 mtu 1420
-	ip addr add $localip dev wg0 || unset localip
+	ip addr add $localip dev wg0 && (echo "$localip" | grep -E -q "/32$") || unset localip
 	echo $privatekey > /tmp/privatekey && wg set wg0 private-key /tmp/privatekey
 	[ "$listenport" ] && wg set wg0 listen-port $listenport
 	[ "$presharedkey" ] && echo $presharedkey > /tmp/presharedkey && wg set wg0 peer $peerkey preshared-key /tmp/presharedkey
@@ -26,7 +26,7 @@ start_wg() {
 	iptables -F wireguard
 	iptables -C INPUT -i wg0 -j wireguard 2>/dev/null || iptables -A INPUT -i wg0 -j wireguard
 	iptables -C FORWARD -i wg0 -j wireguard 2>/dev/null || iptables -A FORWARD -i wg0 -j wireguard
-	echo "$localip" | grep -E -q "/32$" || iptables -A wireguard -s $localip -j ACCEPT
+	[ "$localip" ] && iptables -A wireguard -s $localip -j ACCEPT
 	for ip in ${routeip//,/ }; do
 		if ip route add $ip dev wg0 2>/dev/null; then
 		 iptables -A wireguard -s $ip -j ACCEPT
