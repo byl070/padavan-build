@@ -12,18 +12,30 @@ start_wg() {
 	[ ! "$privatekey" ] && [ ! "$err" ] && err="Local PrivateKey is empty"
 	[ ! "$peerkey" ] && [ ! "$err" ] && err="Peer PublicKey is empty"
 	[ "$err" ] && logger -t "WIREGUARD" "Start Error,$err" && exit "Start Error,$err"
+	iptables -N wireguard 2>/dev/null
+	iptables -F wireguard
 	ip link set dev wg0 down 2>/dev/null
 	ip link del dev wg0 2>/dev/null
 	ip link add dev wg0 type wireguard
 	ip link set dev wg0 mtu 1420
-	ip addr add $localip dev wg0 && ! (echo "$localip" | grep -E -q "/32$") || unset localip
-	echo $privatekey > /tmp/privatekey && wg set wg0 private-key /tmp/privatekey
-	[ "$listenport" ] && wg set wg0 listen-port $listenport
+	if ip addr add $localip dev wg0; then
+  
+	else
+	 logger -t "WIREGUARD" "Set LocalIP Error"
+		return 1
+	fi
+	echo $privatekey > /tmp/privatekey
+	if wg set wg0 private-key /tmp/privatekey; then
+		
+	fi
+	if [ "$listenport" ]; then
+	 if wg set wg0 listen-port $listenport; then
+			fi
+	fi
 	[ "$presharedkey" ] && echo $presharedkey > /tmp/presharedkey && wg set wg0 peer $peerkey preshared-key /tmp/presharedkey
 	wg set wg0 peer $peerkey persistent-keepalive 30 allowed-ips 0.0.0.0/0 endpoint $peerip
 	ip link set dev wg0 up && logger -t "WIREGUARD" "Wireguard is Start"
-	iptables -N wireguard 2>/dev/null
-	iptables -F wireguard
+	
 	iptables -C INPUT -i wg0 -j wireguard 2>/dev/null || iptables -A INPUT -i wg0 -j wireguard
 	iptables -C FORWARD -i wg0 -j wireguard 2>/dev/null || iptables -A FORWARD -i wg0 -j wireguard
 	[ "$localip" ] && iptables -A wireguard -s $localip -j ACCEPT
