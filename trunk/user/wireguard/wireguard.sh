@@ -27,9 +27,10 @@ start_wg() {
 		logger -t "WIREGUARD" "Set PrivateKey Error"
 		return 1
 	fi
-	if [ "$listenport" ]; then
-	 if wg set wg0 listen-port $listenport; then
-			fi
+	if [ "$listenport" ] && ! wg set wg0 listen-port $listenport; then
+		logger -t "WIREGUARD" "Set PrivateKey Error"
+		return 1
+	fi
 	fi
 	[ "$presharedkey" ] && echo $presharedkey > /tmp/presharedkey && wg set wg0 peer $peerkey preshared-key /tmp/presharedkey
 	wg set wg0 peer $peerkey persistent-keepalive 30 allowed-ips 0.0.0.0/0 endpoint $peerip
@@ -42,7 +43,7 @@ start_wg() {
 		if ip route add $ip dev wg0 2>/dev/null; then
 			iptables -A wireguard -s $ip -j ACCEPT
 		else
-		logger -t "WIREGUARD" "AddRoute $ip Error" && echo "AddRoute $ip Error"
+		 logger -t "WIREGUARD" "AddRoute $ip Error" && echo "AddRoute $ip Error"
 		fi
 	done
 }
