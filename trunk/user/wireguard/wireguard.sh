@@ -16,7 +16,7 @@ start_wg() {
 	iptables -N wireguard 2>/dev/null
 	iptables -F wireguard
 	if ip addr add $localip dev wg0; then
-		echo $localip
+		echo $localip | grep -E -q "/32$" 
 	else
 		logger -t "WIREGUARD" "Set LocalIP Error"
 		return 1
