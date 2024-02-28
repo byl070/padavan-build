@@ -24,7 +24,8 @@ start_wg() {
 	fi
 	echo $privatekey > /tmp/privatekey
 	if ! wg set wg0 private-key /tmp/privatekey; then
-		
+		logger -t "WIREGUARD" "Set PrivateKey Error"
+		return 1
 	fi
 	if [ "$listenport" ]; then
 	 if wg set wg0 listen-port $listenport; then
@@ -39,9 +40,9 @@ start_wg() {
 	[ "$localip" ] && iptables -A wireguard -s $localip -j ACCEPT
 	for ip in ${routeip//,/ }; do
 		if ip route add $ip dev wg0 2>/dev/null; then
-		 iptables -A wireguard -s $ip -j ACCEPT
+			iptables -A wireguard -s $ip -j ACCEPT
 		else
-		 logger -t "WIREGUARD" "AddRoute $ip Error" && echo "AddRoute $ip Error"
+		logger -t "WIREGUARD" "AddRoute $ip Error" && echo "AddRoute $ip Error"
 		fi
 	done
 }
