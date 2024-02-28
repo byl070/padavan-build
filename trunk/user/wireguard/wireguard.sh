@@ -37,8 +37,7 @@ start_wg() {
 		for i in $(seq 1 5); do wg set wg0 peer $peerkey endpoint $peerip && break || sleep 3; done
 	fi
 	wg set wg0 peer $peerkey persistent-keepalive 30 allowed-ips 0.0.0.0/0
-	ip link set dev wg0 up
-	logger -t "WIREGUARD" "Wireguard is Start"
+	ip link set dev wg0 up && logger -t "WIREGUARD" "Wireguard is Start"
 	iptables -C INPUT -i wg0 -j wireguard 2>/dev/null || iptables -A INPUT -i wg0 -j wireguard
 	iptables -C FORWARD -i wg0 -j wireguard 2>/dev/null || iptables -A FORWARD -i wg0 -j wireguard
 	[ "$localip" ] && iptables -A wireguard -s $localip -j ACCEPT
