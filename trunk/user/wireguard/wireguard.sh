@@ -22,8 +22,7 @@ start_wg() {
 		logger -t "WIREGUARD" "Set LocalIP Error"
 		return 1
 	fi
-	echo $privatekey > /tmp/privatekey
-	if ! wg set wg0 private-key /tmp/privatekey; then
+	if echo $privatekey > /tmp/privatekey && ! wg set wg0 private-key /tmp/privatekey; then
 		logger -t "WIREGUARD" "Set PrivateKey Error"
 		return 1
 	fi
