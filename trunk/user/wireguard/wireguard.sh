@@ -33,7 +33,7 @@ start_wg() {
 	fi
 	wg set wg0 peer $peerkey persistent-keepalive 30 allowed-ips 0.0.0.0/0
 	if [ "$peerip" ]
-  for i in $(seq 1 5); do wg set wg0 peer $peerkey endpoint $peerip && break || sleep 3; done
+	for i in $(seq 1 5); do wg set wg0 peer $peerkey endpoint $peerip && break || sleep 3; done
 	fi
 	ip link set dev wg0 up
 	logger -t "WIREGUARD" "Wireguard is Start"
