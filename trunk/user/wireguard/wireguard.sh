@@ -8,10 +8,7 @@ start_wg() {
 	presharedkey="$(nvram get wireguard_prekey)"
 	peerip="$(nvram get wireguard_peerip)"
 	routeip="$(nvram get wireguard_routeip)"
-	[ ! "$localip" ] && err="LocalIP is empty"
-	[ ! "$privatekey" ] && [ ! "$err" ] && err="Local PrivateKey is empty"
-	[ ! "$peerkey" ] && [ ! "$err" ] && err="Peer PublicKey is empty"
-	[ "$err" ] && logger -t "WIREGUARD" "Start Error,$err" && exit "Start Error,$err"
+	
 	iptables -N wireguard 2>/dev/null
 	iptables -F wireguard
 	ip link set dev wg0 down 2>/dev/null
@@ -34,9 +31,10 @@ start_wg() {
 		logger -t "WIREGUARD" "Set PresharedKey Error"
 		return 1
 	fi
-	wg set wg0 peer $peerkey persistent-keepalive 30 allowed-ips 0.0.0.0/0 endpoint $peerip
-	ip link set dev wg0 up && logger -t "WIREGUARD" "Wireguard is Start"
-	
+	wg set wg0 peer $peerkey persistent-keepalive 30 allowed-ips 0.0.0.0/0
+	wg set wg0 peer $peerkey endpoint $peerip
+	ip link set dev wg0 up
+	logger -t "WIREGUARD" "Wireguard is Start"
 	iptables -C INPUT -i wg0 -j wireguard 2>/dev/null || iptables -A INPUT -i wg0 -j wireguard
 	iptables -C FORWARD -i wg0 -j wireguard 2>/dev/null || iptables -A FORWARD -i wg0 -j wireguard
 	[ "$localip" ] && iptables -A wireguard -s $localip -j ACCEPT
