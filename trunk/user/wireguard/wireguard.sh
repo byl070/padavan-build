@@ -28,11 +28,13 @@ start_wg() {
 		return 1
 	fi
 	if [ "$listenport" ] && ! wg set wg0 listen-port $listenport; then
-		logger -t "WIREGUARD" "Set PrivateKey Error"
+		logger -t "WIREGUARD" "Set ListenPort Error"
 		return 1
 	fi
+	if [ "$presharedkey" ] && echo $presharedkey > /tmp/presharedkey && ! wg set wg0 peer $peerkey preshared-key /tmp/presharedkey; then
+		logger -t "WIREGUARD" "Set PresharedKey Error"
+		return 1
 	fi
-	[ "$presharedkey" ] && echo $presharedkey > /tmp/presharedkey && wg set wg0 peer $peerkey preshared-key /tmp/presharedkey
 	wg set wg0 peer $peerkey persistent-keepalive 30 allowed-ips 0.0.0.0/0 endpoint $peerip
 	ip link set dev wg0 up && logger -t "WIREGUARD" "Wireguard is Start"
 	
