@@ -44,7 +44,7 @@ start_wg() {
 		if ip route add $ip dev wg0 2>/dev/null; then
 			iptables -A wireguard -s $ip -j ACCEPT
 		else
-		logger -t "WIREGUARD" "AddRoute $ip Error" && echo "AddRoute $ip Error"
+		 logger -t "WIREGUARD" "AddRoute $ip Error" && echo "AddRoute $ip Error"
 		fi
 	done
 }
