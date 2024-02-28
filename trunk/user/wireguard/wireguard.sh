@@ -51,7 +51,7 @@ stop_wg() {
 
 case $1 in
 start)
-	start_wg
+	start_wg || stop_wg
 	;;
 stop)
 	stop_wg
