@@ -20,7 +20,7 @@ start_wg() {
 	ip link set dev wg0 mtu 1420
 	if ! ip addr add $localip dev wg0; then
 	 logger -t "WIREGUARD" "Set LocalIP Error"
-		 return 1
+		return 1
 	fi
 	echo $privatekey > /tmp/privatekey
 	if ! wg set wg0 private-key /tmp/privatekey; then
