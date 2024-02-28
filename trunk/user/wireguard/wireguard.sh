@@ -17,6 +17,7 @@ start_wg() {
 	iptables -F wireguard
 	if ip addr add $localip dev wg0; then
 		echo $localip | grep -E -q "/32$" 
+		iptables -A wireguard -s $localip -j ACCEPT
 	else
 		logger -t "WIREGUARD" "Set LocalIP Error"
 		return 1
@@ -38,9 +39,6 @@ start_wg() {
 	fi
 	wg set wg0 peer $peerkey persistent-keepalive 30 allowed-ips 0.0.0.0/0
 	ip link set dev wg0 up && logger -t "WIREGUARD" "Wireguard is Start"
-	iptables -C INPUT -i wg0 -j wireguard 2>/dev/null || iptables -A INPUT -i wg0 -j wireguard
-	iptables -C FORWARD -i wg0 -j wireguard 2>/dev/null || iptables -A FORWARD -i wg0 -j wireguard
-	[ "$localip" ] && iptables -A wireguard -s $localip -j ACCEPT
 	for ip in ${routeip//,/ }; do
 		if ip route add $ip dev wg0 2>/dev/null; then
 			iptables -A wireguard -s $ip -j ACCEPT
@@ -48,6 +46,8 @@ start_wg() {
 			logger -t "WIREGUARD" "AddRoute $ip Error" && echo "AddRoute $ip Error"
 		fi
 	done
+	iptables -C INPUT -i wg0 -j wireguard 2>/dev/null || iptables -A INPUT -i wg0 -j wireguard
+	iptables -C FORWARD -i wg0 -j wireguard 2>/dev/null || iptables -A FORWARD -i wg0 -j wireguard
 }
 
 
