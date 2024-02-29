@@ -9,12 +9,12 @@ start_wg() {
 	peerip="$(nvram get wireguard_peerip)"
 	routeip="$(nvram get wireguard_routeip)"
 	
+	iptables -N wireguard 2>/dev/null
+	iptables -F wireguard
 	ip link set dev wg0 down 2>/dev/null
 	ip link del dev wg0 2>/dev/null
 	ip link add dev wg0 type wireguard
 	ip link set dev wg0 mtu 1420
-	iptables -N wireguard 2>/dev/null
-	iptables -F wireguard
 	if ip addr add $localip dev wg0; then
 		echo $localip | grep -E -q "/32$" 
 		iptables -A wireguard -s $localip -j ACCEPT
