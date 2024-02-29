@@ -35,11 +35,11 @@ start_wg() {
 		return 1
 	fi
 	if [ "$peerip" ]; then
-		for i in $(seq 1 5); do wg set wg0 peer $peerkey endpoint $peerip && (unset peerip;break) || sleep 3; done
+		for i in $(seq 1 10); do wg set wg0 peer $peerkey endpoint $peerip && unset peerip && break || sleep 3; done
 		[ "$peerip" ] && logger -t "WIREGUARD" "Set PeerIP Error"
 	fi
 	wg set wg0 peer $peerkey persistent-keepalive 30 allowed-ips 0.0.0.0/0
-	ip link set dev wg0 up && logger -t "WIREGUARD" "Wireguard is Start"
+	ip link set dev wg0 up
 	for ip in ${routeip//,/ }; do
 		if ip route add $ip dev wg0 2>/dev/null; then
 			iptables -A wireguard -s $ip -j ACCEPT
@@ -49,16 +49,17 @@ start_wg() {
 	done
 	iptables -C INPUT -i wg0 -j wireguard 2>/dev/null || iptables -A INPUT -i wg0 -j wireguard
 	iptables -C FORWARD -i wg0 -j wireguard 2>/dev/null || iptables -A FORWARD -i wg0 -j wireguard
+	logger -t "WIREGUARD" "Wireguard is Start"
 }
 
 
 stop_wg() {
 	if ip link set dev wg0 down 2>/dev/null && ip link del dev wg0; then
-		logger -t "WIREGUARD" "Wireguard is Stop"
 		while iptables -C INPUT -i wg0 -j wireguard 2>/dev/null; do iptables -D INPUT -i wg0 -j wireguard; done
 		while iptables -C FORWARD -i wg0 -j wireguard 2>/dev/null; do iptables -D FORWARD -i wg0 -j wireguard; done
 		iptables -F wireguard 2>/dev/null
 		iptables -X wireguard 2>/dev/null
+		logger -t "WIREGUARD" "Wireguard is Stop"
 	fi
 }
 
