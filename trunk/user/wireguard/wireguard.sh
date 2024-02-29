@@ -13,7 +13,7 @@ start_wg() {
 	iptables -F wireguard
 	ip link set dev wg0 down 2>/dev/null
 	ip link del dev wg0 2>/dev/null
-	ip link add dev wg0 type wireguard
+	ip link add dev wg0 type wireguard || return 1
 	ip link set dev wg0 mtu 1420
 	if ip addr add $localip dev wg0; then
 		echo $localip | grep -E -q "/32$" 
