@@ -16,7 +16,7 @@ start_wg() {
 	ip link add dev wg0 type wireguard || return 1
 	ip link set dev wg0 mtu 1420
 	if ip addr add $localip dev wg0; then
-		echo $localip | grep -E -q "/32$" 
+		echo $localip | grep -E "/[1-9]+$" | ! grep -q "/32" |
 		iptables -A wireguard -s $localip -j ACCEPT
 	else
 		logger -t "WIREGUARD" "Set LocalIP Error"
