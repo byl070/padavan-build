@@ -38,7 +38,7 @@ start_wg() {
 		 if [ "$peerip" ]; then
 				for i in $(seq 1 5); do wg set wg0 peer $peerkey endpoint $peerip && unset peerip && break || sleep 3; done
 				[ "$peerip" ] && logger -t "WIREGUARD" "Set PeerIP Error"
-			fi
+				fi
 	else
 		return 1
 	fi
