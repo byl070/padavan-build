@@ -38,7 +38,7 @@ start_wg() {
 		echo "Set Peer PublicKey Error" && logger -t "WIREGUARD" "Set Peer PublicKey Error"
 		return 1
 	elif [ "$peerip" ]; then
-	 for i in $(seq 1 5); do wg set wg0 peer $peerkey endpoint $peerip && unset peerip && break || sleep 3; done
+	  for i in $(seq 1 5); do wg set wg0 peer $peerkey endpoint $peerip && unset peerip && break || sleep 3; done
 		[ "$peerip" ] && echo "Set PeerIP Error" && logger -t "WIREGUARD" "Set PeerIP Error"
 	fi
 	ip link set dev wg0 up
