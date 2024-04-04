@@ -39,10 +39,10 @@ start_wg() {
 			for i in $(seq 1 5); do wg set wg0 peer $peerkey endpoint $peerip && unset peerip && break || sleep 3; done
 			[ "$peerip" ] && logger -t "WIREGUARD" "Set PeerIP Error"
 		fi
+		ip link set dev wg0 up
 	else
 		return 1
 	fi
-	ip link set dev wg0 up
 	for ip in ${routeip//,/ }; do
 		if ip route add $ip dev wg0 2>/dev/null; then
 			iptables -A wireguard -s $ip -j ACCEPT
