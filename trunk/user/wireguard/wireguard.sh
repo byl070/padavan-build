@@ -37,7 +37,7 @@ start_wg() {
 	if wg set wg0 peer $peerkey allowed-ips 0.0.0.0/0; then
 		if [ "$peerip" ]; then
 			for i in $(seq 1 5); do wg set wg0 peer $peerkey endpoint $peerip && unset peerip && break || sleep 3; done
-			[ "$peerip" ] && logger -t "WIREGUARD" "Set PeerIP Error"
+			[ "$peerip" ] && echo "Set PeerIP Error" && logger -t "WIREGUARD" "Set PeerIP Error"
 		fi
 	else
 		return 1
@@ -47,12 +47,12 @@ start_wg() {
 		if ip route add $ip dev wg0 2>/dev/null; then
 			iptables -A wireguard -s $ip -j ACCEPT
 		else
-			logger -t "WIREGUARD" "AddRoute $ip Error" && echo "AddRoute $ip Error"
+			echo "AddRoute $ip Error" && logger -t "WIREGUARD" "AddRoute $ip Error"
 		fi
 	done
 	iptables -C INPUT -i wg0 -j wireguard 2>/dev/null || iptables -A INPUT -i wg0 -j wireguard
 	iptables -C FORWARD -i wg0 -j wireguard 2>/dev/null || iptables -A FORWARD -i wg0 -j wireguard
-	logger -t "WIREGUARD" "Wireguard is Start"
+	echo "Wireguard is Start" && logger -t "WIREGUARD" "Wireguard is Start"
 }
 
 
