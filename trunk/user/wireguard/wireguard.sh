@@ -19,19 +19,19 @@ start_wg() {
 		localip="$(echo $localip | grep -E "/[1-9]+" || echo "${localip}/32")"
 		echo $localip | grep -E -q "/32$" || iptables -A wireguard -s $localip -j ACCEPT
 	else
-		logger -t "WIREGUARD" "Set LocalIP Error"
+		echo "Set LocalIP Error" && logger -t "WIREGUARD" "Set LocalIP Error"
 		return 1
 	fi
 	if echo $privatekey > /tmp/privatekey && ! wg set wg0 private-key /tmp/privatekey; then
-		logger -t "WIREGUARD" "Set PrivateKey Error"
+		echo "Set PrivateKey Error" && logger -t "WIREGUARD" "Set PrivateKey Error"
 		return 1
 	fi
 	if [ "$listenport" ] && ! wg set wg0 listen-port $listenport; then
-		logger -t "WIREGUARD" "Set ListenPort Error"
+		echo "Set ListenPort Error" && logger -t "WIREGUARD" "Set ListenPort Error"
 		return 1
 	fi
 	if [ "$presharedkey" ] && echo $presharedkey > /tmp/presharedkey && ! wg set wg0 peer $peerkey preshared-key /tmp/presharedkey; then
-		logger -t "WIREGUARD" "Set PresharedKey Error"
+		echo "Set PresharedKey Error" && logger -t "WIREGUARD" "Set PresharedKey Error"
 		return 1
 	fi
 	if wg set wg0 peer $peerkey allowed-ips 0.0.0.0/0; then
