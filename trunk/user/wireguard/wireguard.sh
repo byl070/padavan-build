@@ -35,7 +35,7 @@ start_wg() {
 		return 1
 	fi
 	if ! wg set wg0 peer $peerkey allowed-ips 0.0.0.0/0; then
-	 return 1
+	  return 1
 	fi
 	if [ "$peerip" ]; then
 		for i in $(seq 1 5); do wg set wg0 peer $peerkey endpoint $peerip && unset peerip && break || sleep 3; done
