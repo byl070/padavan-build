@@ -8,7 +8,7 @@ if [ ! -f $dir/wireguard.sh ]; then
 	return 1
 fi
 if [ ! -x $dir/wireguard.sh ]; then
-	chmod +x
+	chmod +x $dir/wireguard.sh
 fi
 
 
