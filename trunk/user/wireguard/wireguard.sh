@@ -10,6 +10,7 @@ else
  $dir/wireguard.sh $1
 fi
 
+
 start_wg() {
 	localip="$(nvram get wireguard_localip)"
 	listenport="$(nvram get wireguard_port)"
