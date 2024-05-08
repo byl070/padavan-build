@@ -40,7 +40,7 @@ start_wg() {
 	elif [ "$peerip" ]; then
 		for i in $(seq 1 5); do nslookup $peerip; done
 		if ! wg set wg0 peer $peerkey endpoint $peerip; then
-			 echo "Set PeerIP Error" && logger -t "WIREGUARD" "Set PeerIP Error"
+			echo "Set PeerIP Error" && logger -t "WIREGUARD" "Set PeerIP Error"
 		fi
 	fi
 	ip link set dev wg0 up
