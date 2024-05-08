@@ -2,7 +2,7 @@
 
 dir=/etc/storage/wireguard
 if [ ! -d $dir ]; then mkdir $dir; fi
-
+if [ ! -f $dir/wireguard.sh ]; then ;fi
 
 
 start_wg() {
