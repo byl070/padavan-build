@@ -6,11 +6,10 @@ if [ ! -f $dir/wireguard.sh ]; then
 	echo "not found $dir/wireguard.sh"
 	logger -t "WireGuard" "not found $dir/wireguard.sh"
 	return 1
+else
+chmod +x $dir/wireguard.sh
+$dir/wireguard.sh $1
 fi
-if [ ! -x $dir/wireguard.sh ]; then
-	chmod +x $dir/wireguard.sh
-fi
-
 
 start_wg() {
 	localip="$(nvram get wireguard_localip)"
