@@ -1,6 +1,7 @@
 #!/bin/sh
 
 dir=/etc/storage/wireguard
+if [ ! -d $dir ]; then mkdir $dir; fi
 
 
 
