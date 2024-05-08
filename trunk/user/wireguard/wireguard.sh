@@ -2,7 +2,14 @@
 
 dir=/etc/storage/wireguard
 if [ ! -d $dir ]; then mkdir $dir; fi
-if [ ! -f $dir/wireguard.sh ]; then ;fi
+if [ ! -f $dir/wireguard.sh ]; then
+	echo "not found $dir/wireguard.sh"
+	logger -t "WireGuard" "not found $dir/wireguard.sh"
+	return 1
+fi
+if [ ! -x $dir/wireguard.sh ]; then
+	chmod +x
+fi
 
 
 start_wg() {
