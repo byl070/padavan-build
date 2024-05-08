@@ -1,5 +1,9 @@
 #!/bin/sh
 
+dir=/etc/storage/wireguard
+
+
+
 start_wg() {
 	localip="$(nvram get wireguard_localip)"
 	listenport="$(nvram get wireguard_port)"
