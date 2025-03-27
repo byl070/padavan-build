@@ -26,7 +26,6 @@ configure:
 	( cd $(SRC_NAME) ; \
 	./configure \
 		--prefix=/usr \
-#		--disable-openssl
 		--disable-readline \
 		--host=$(HOST_TARGET) \
 		--build=$(HOST_BUILD) ; \
