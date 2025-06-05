@@ -48,8 +48,8 @@ jobs:
       env:
         TNAME: RM2100
       run: |
-#sudo ln /toolchain-4.4.x ./toolchain-4.4.x
-#sudo ln /opt/rt-n56u/trunk/linux-4.4.x/toolchain-mipsel/toolchain-4.4.x ./toolchain-4.4.x
+#        sudo ln /toolchain-4.4.x ./toolchain-4.4.x
+#        sudo ln /opt/rt-n56u/trunk/linux-4.4.x/toolchain-mipsel/toolchain-4.4.x ./toolchain-4.4.x
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
         echo "configs/templates/$TNAME.config not found "
