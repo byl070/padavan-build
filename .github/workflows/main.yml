@@ -41,8 +41,9 @@ jobs:
         cd /opt/rt-n56u/toolchain-mipsel
         sudo ./clean_toolchain
         sudo ./build_toolchain
+        mv ./toolchain-4.4.x /
 #        sh dl_toolchain.sh
-#        mkdir -p /opt/images/
+        mkdir -p /opt/images/
     - name: Build Firmware
       env:
         TNAME: RM2100
