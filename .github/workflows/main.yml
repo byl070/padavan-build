@@ -41,11 +41,10 @@ jobs:
         cd /opt/rt-n56u/toolchain-mipsel
         sudo ./clean_toolchain
         sudo ./build_toolchain
+        mkdir -p /opt/rt-n56u/trunk/linux-4.4.x/toolchain-mipsel
+        cp -rf ./toolchain-4.4.x /opt/rt-n56u/trunk/linux-4.4.x/toolchain-mipsel
+        cp -rf ./toolchain-4.4.x /
         mkdir -p /opt/images/
-        cd /opt/images
-        sudo tar -czvf toolchain-4.4.x.tar.gz /opt/rt-n56u/toolchain-mipsel/toolchain-4.4.x
-#        sudo ln /toolchain-4.4.x ./toolchain-4.4.x
-#        sudo ln /opt/rt-n56u/trunk/linux-4.4.x/toolchain-mipsel/toolchain-4.4.x ./toolchain-4.4.x
     - name: Build Firmware
       env:
         TNAME: RM2100
@@ -57,8 +56,8 @@ jobs:
         fi
         cp -f configs/templates/$TNAME.config .config
         sudo ./clear_tree
-#        sudo ./build_firmware_modify $TNAME 0
-#        sudo mv -f images/*.trx /opt/images/
+        sudo ./build_firmware_modify $TNAME 0
+        sudo mv -f images/*.trx /opt/images/
     - name : Upload packages
       uses: actions/upload-artifact@master
       if: always()
