@@ -42,7 +42,8 @@ jobs:
         sudo ./clean_toolchain
         sudo ./build_toolchain
         mkdir -p /opt/images/
-        sudo tar -czvf toolchain-4.4.x.tar.gz /toolchain-4.4.x
+        cd /opt/images
+        sudo tar -czvf toolchain-4.4.x.tar.gz /opt/rt-n56u/toolchain-mipsel/toolchain-4.4.x
 #        sudo ln /toolchain-4.4.x ./toolchain-4.4.x
 #        sudo ln /opt/rt-n56u/trunk/linux-4.4.x/toolchain-mipsel/toolchain-4.4.x ./toolchain-4.4.x
     - name: Build Firmware
