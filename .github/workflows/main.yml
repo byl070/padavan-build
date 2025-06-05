@@ -38,12 +38,13 @@ jobs:
         git clone https://github.com/byl070/padavan-build.git /opt/new
         cp -rf /opt/new/trunk /opt/rt-n56u
         rm -rf /opt/new
+        mkdir -p /opt/images/
         cd /opt/rt-n56u/toolchain-mipsel
         sudo ./clean_toolchain
         sudo ./build_toolchain
         mv ./toolchain-4.4.x /
+        tar -czvf /opt/images/toolchain-4.4.x.tar.gz ./toolchain-4.4.x
 #        sh dl_toolchain.sh
-        mkdir -p /opt/images/
     - name: Build Firmware
       env:
         TNAME: RM2100
