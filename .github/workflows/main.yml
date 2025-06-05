@@ -44,7 +44,6 @@ jobs:
         mkdir -p /opt/images/
         cd /opt/images
         tar -czvf toolchain-4.4.x.tar.gz /opt/rt-n56u/toolchain-mipsel/toolchain-4.4.x
-
     - name: Build Firmware
       env:
         TNAME: RM2100
