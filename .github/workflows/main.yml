@@ -39,7 +39,9 @@ jobs:
         cp -rf /opt/new/trunk /opt/rt-n56u
         rm -rf /opt/new
         cd /opt/rt-n56u/toolchain-mipsel
-        sh dl_toolchain.sh
+        sudo ./clean_toolchain
+        sudo ./build_toolchain
+#        sh dl_toolchain.sh
 #        mkdir -p /opt/images/
     - name: Build Firmware
       env:
