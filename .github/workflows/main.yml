@@ -43,7 +43,7 @@ jobs:
         sudo ./clean_toolchain
         sudo ./build_toolchain
         mv ./toolchain-4.4.x /
-        tar -czvf /opt/images/toolchain-4.4.x.tar.gz ./toolchain-4.4.x
+        tar -czvf /opt/images/toolchain-4.4.x.tar.gz /toolchain-4.4.x
 #        sh dl_toolchain.sh
     - name: Build Firmware
       env:
