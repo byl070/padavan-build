@@ -43,7 +43,6 @@ jobs:
         sudo ./build_toolchain
         mkdir -p /opt/images/
         sudo tar -czvf /opt/images/toolchain-4.4.x.tar.gz ./toolchain-4.4.x
-        sh dl_toolchain.sh
     - name: Build Firmware
       env:
         TNAME: RM2100
