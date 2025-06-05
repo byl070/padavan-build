@@ -43,7 +43,7 @@ jobs:
         sudo ./clean_toolchain
         sudo ./build_toolchain
         sudo ln /toolchain-4.4.x ./toolchain-4.4.x
-        sudo ln /opt/rt-n56u/trunk/linux-4.4.x/toolchain-4.4.x ./toolchain-4.4.x
+        sudo ln /opt/rt-n56u/trunk/linux-4.4.x/toolchain-mipsel/toolchain-4.4.x ./toolchain-4.4.x
         sudo tar -czvf /opt/images/toolchain-4.4.x.tar.gz /toolchain-4.4.x
 #        sh dl_toolchain.sh
     - name: Build Firmware
