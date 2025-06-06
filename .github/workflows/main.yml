@@ -27,7 +27,6 @@ jobs:
         cpio git python3-docutils gettext automake autopoint texinfo build-essential help2man \
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget \
         locales libc6-dev language-pack-zh-hans
-        sudo locale-gen zh_CN.UTF8
         sudo apt-get -y install linux-header-$(uname -r)
     - name: Clone source code
       env:
