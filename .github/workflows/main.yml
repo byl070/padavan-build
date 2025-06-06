@@ -26,7 +26,9 @@ jobs:
         sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
         cpio git python3-docutils gettext automake autopoint texinfo build-essential help2man \
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget \
-        libsmbclient-dev libc6-dev libpopt-dev libtirpc-dev
+        locales libc6-dev language-pack-zh-hans
+        sudo locale-gen zh_CN.UTF8
+        sudo apt-get -y install linux-header-$(uname -r)
     - name: Clone source code
       env:
         KERNEL: 4.4
