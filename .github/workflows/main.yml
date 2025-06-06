@@ -27,7 +27,7 @@ jobs:
         cpio git python3-docutils gettext automake autopoint texinfo build-essential help2man \
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget \
         locales libc6-dev language-pack-zh-hans \
-        linux-headers-$(uname -r)
+        linux-headers-$(uname -r) libnls-dev
     - name: Clone source code
       env:
         KERNEL: 4.4
