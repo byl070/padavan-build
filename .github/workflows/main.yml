@@ -40,11 +40,11 @@ jobs:
         rm -rf /opt/new
         cd /opt/rt-n56u/toolchain-mipsel
         sudo ./clean_toolchain
-#       sudo ./build_toolchain
+        sudo ./build_toolchain
         sh dl_toolchain.sh
-#       mkdir -p /opt/rt-n56u/trunk/linux-4.4.x/toolchain-mipsel
-#       sudo cp -rf ./toolchain-4.4.x /opt/rt-n56u/trunk/linux-4.4.x/toolchain-mipsel
-#       sudo cp -rf ./toolchain-4.4.x /
+        mkdir -p /opt/rt-n56u/trunk/linux-4.4.x/toolchain-mipsel
+        sudo cp -rf ./toolchain-4.4.x /opt/rt-n56u/trunk/linux-4.4.x/toolchain-mipsel
+        sudo cp -rf ./toolchain-4.4.x /
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
