@@ -26,13 +26,13 @@ jobs:
         sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
         cpio git python3-docutils gettext automake autopoint texinfo build-essential help2man \
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget \
-        libcifs-dev libsmbclient-dev
+        libsmbclient-dev
     - name: Clone source code
       env:
         KERNEL: 4.4
       run: |
         if [ $KERNEL = "4.4" ] ; then
-        git clone --depth=1 https://github.com/byl070/padavan-4.4-0.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/byl070/padavan-4.4.git /opt/rt-n56u
         else
         exit 1
         fi
