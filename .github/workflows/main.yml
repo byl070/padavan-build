@@ -26,7 +26,8 @@ jobs:
         sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
         cpio git python3-docutils gettext automake autopoint texinfo build-essential help2man \
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget \
-        locales libc6-dev
+        locales libc6-dev linux-headers-$(uname -r) build-essential
+        sudo modprobe nls_utf8
     - name: Clone source code
       env:
         KERNEL: 4.4
