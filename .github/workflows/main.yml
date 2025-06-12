@@ -47,8 +47,8 @@ jobs:
         TNAME: RM2100
       run: |
         cd /opt/rt-n56u/trunk
-        sudo ./clear_tree
         sudo cp -f configs/templates/$TNAME.config .config
+        sudo ./clear_tree
         sudo ./build_firmware_modify $TNAME
         sudo mkdir -p /opt/images/
         sudo mv -f images/*.trx /opt/images/
