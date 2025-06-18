@@ -44,7 +44,7 @@ jobs:
         sh dl_toolchain.sh
     - name: Build Firmware
       env:
-        TNAME: HC5962
+        TNAME: RM2100
       run: |
         cd /opt/rt-n56u/trunk
         sudo cp -f configs/templates/$TNAME.config .config
